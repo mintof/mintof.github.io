@@ -1,4 +1,4 @@
-new Vue({
+var canvas_vue = new Vue({
     el: "#picture",
     data:{
         picture: new Image(),
@@ -6,27 +6,20 @@ new Vue({
         height: 1000,
         context: document.getElementById("canvas").getContext('2d'),
         ex_point: {"x":0, "y":0},
-        is_down: false
+        is_drawing: false
     },
     methods:{
         startDraw: function(e){
             console.log("mouseUp");
             console.log(e);
-            e.targetVM.is_down = true;
+            e.targetVM.is_drawing = true;
             context = e.targetVM.context;
             e.targetVM.ex_point.x = e.layerX;
             e.targetVM.ex_point.y = e.layerY;
-            /*context.beginPath();
-            context.moveTo(20, 20);
-            context.lineTo(120, 20);
-            context.lineTo(120, 120);
-            context.lineTo(20, 120);
-            context.closePath();
-            context.stroke();*/
         },
         draw: function(e){
             console.log("mouseMove");
-            if(e.targetVM.is_down){
+            if(e.targetVM.is_drawing){
                 var context = e.targetVM.context;
                 var ex_point = e.targetVM.ex_point;
                 var current_point = new Object()
@@ -42,8 +35,13 @@ new Vue({
         },
         stopDraw: function(e){
             console.log("mouseDown");
-            e.targetVM.is_down = false;
+            e.targetVM.is_drawing = false;
         }
     }
-})
+});
 
+$(document).ready(function(){
+    $("#canvas").mouseout(function(){
+        canvas_vue.is_drawing = false;
+    });
+});

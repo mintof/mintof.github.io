@@ -7,16 +7,18 @@
     <script type="text/javascript" src="../jslib/vue.js"></script>
 </head>
 <body>
-    <div id="picture">
-        <canvas id="canvas"
-                width="{{width}}"
-                height="{{height}}"
-                v-on="  mousedown:  startDraw,
-                        mousemove:  draw,
-                        mouseup:    stopDraw,
-                        blur:       stopDraw,
-                        ">
-        </canvas>
+    <div id="content">
+        <div id="picture">
+            <canvas id="canvas"
+                    width="{{width}}"
+                    height="{{height}}"
+                    v-on="  mousedown:  startDraw,
+                            mousemove:  draw,
+                            mouseup:    stopDraw,
+                            mouseup:    draw
+                            ">
+            </canvas>
+        </div>
     </div>
 </body>
 <script type="text/javascript" src="indexController.js"></script>
