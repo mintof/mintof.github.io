@@ -11,7 +11,11 @@
         <canvas id="canvas"
                 width="{{width}}"
                 height="{{height}}"
-                v-on="on: onClick, ">
+                v-on="  mousedown:  startDraw,
+                        mousemove:  draw,
+                        mouseup:    stopDraw,
+                        blur:       stopDraw,
+                        ">
         </canvas>
     </div>
 </body>
