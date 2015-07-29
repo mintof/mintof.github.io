@@ -10,21 +10,25 @@
 <body>
     <div id="content">
         <div id="canvases">
-            <canvas id="draw_canvas"
-                    width="{{width}}"
-                    height="{{height}}"
-                    v-on="  mousedown:  startDraw,
-                            mousemove:  draw,
-                            mouseup:    stopDraw,
-                            mouseup:    draw,
-                            mouseout:   stopDraw
-                            ">
-            </canvas>
-            <canvas id="picture_canvas">
+            <div class="pile">
+                <canvas id="draw_canvas"
+                        width="{{width}}"
+                        height="{{height}}"
+                        v-on="  mousedown:  startDraw,
+                                mousemove:  draw,
+                                mouseup:    stopDraw,
+                                mouseup:    draw,
+                                mouseout:   stopDraw,
+                                ">
+                </canvas>
+                <canvas id="picture_canvas"
+                        width="{{width}}"
+                        height="{{height}}">
 
-            </canvas>
+                </canvas>
+            </div>
 
-            <form   id="picture_form">
+            <form id="canvases_form">
                 <input type="file"
                        v-on="  change: inputFile
                     ">

@@ -6,17 +6,17 @@
 }
 
 #picture_canvas{
-    position: absolute;
+    position: relative;
     left: 0;
     top: 0;
     z-index: -1;
 }
 
-#canvases{
+.pile{
     position: relative;
     border: 1px black solid;
 }
 
-#picture_form{
-    z-index: 0;
+
+#canvases_form{
 }
