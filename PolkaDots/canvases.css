@@ -1,0 +1,22 @@
+#draw_canvas{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 0;
+}
+
+#picture_canvas{
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+#canvases{
+    position: relative;
+    border: 1px black solid;
+}
+
+#picture_form{
+    z-index: 0;
+}

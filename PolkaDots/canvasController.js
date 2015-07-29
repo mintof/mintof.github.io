@@ -1,10 +1,11 @@
 var canvas_vue = new Vue({
-    el: "#picture",
+    el: "#canvases",
     data:{
         picture: new Image(),
         width: 1000,
         height: 1000,
-        context: document.getElementById("canvas").getContext('2d'),
+        draw_context: document.getElementById("draw_canvas").getContext('2d'),
+        picture_context: document.getElementById("picture_canvas").getContext('2d'),
         ex_point: {"x":0, "y":0},
         is_drawing: false
     },
@@ -13,16 +14,17 @@ var canvas_vue = new Vue({
             console.log("mouseUp");
             console.log(e);
             e.targetVM.is_drawing = true;
-            context = e.targetVM.context;
+            context = e.targetVM.draw_context;
             e.targetVM.ex_point.x = e.layerX;
             e.targetVM.ex_point.y = e.layerY;
         },
         draw: function(e){
             console.log("mouseMove");
             if(e.targetVM.is_drawing){
-                var context = e.targetVM.context;
+                var context = e.targetVM.draw_context;
+                context.linewidth = 20;
                 var ex_point = e.targetVM.ex_point;
-                var current_point = new Object()
+                var current_point = new Object();
                 current_point.x = e.layerX;
                 current_point.y = e.layerY;
                 context.beginPath();
@@ -36,12 +38,23 @@ var canvas_vue = new Vue({
         stopDraw: function(e){
             console.log("mouseDown");
             e.targetVM.is_drawing = false;
-        }
-    }
-});
+        },
+        inputFile: function(e){
+            console.log("input File");
+            var file = e.target.files[0];
+            if(!file.type.match('image.*')){
+                return;
+            }
+            var reader = new FileReader();
+            reader.onload = function(){
+                var image = new Image();
+                image.src = this.result;
+                var context = document.getElementById("picture_canvas").getContext('2d');
+                context.drawImage(image, 0, 0);
+            }
+            reader.readAsDataURL(file);
 
-$(document).ready(function(){
-    $("#canvas").mouseout(function(){
-        canvas_vue.is_drawing = false;
-    });
+        }
+
+    }
 });

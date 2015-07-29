@@ -5,21 +5,32 @@
     <title>ほげほげ</title>
     <script type="text/javascript" src="../jslib/jquery.js"></script>
     <script type="text/javascript" src="../jslib/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="canvases.css">
 </head>
 <body>
     <div id="content">
-        <div id="picture">
-            <canvas id="canvas"
+        <div id="canvases">
+            <canvas id="draw_canvas"
                     width="{{width}}"
                     height="{{height}}"
                     v-on="  mousedown:  startDraw,
                             mousemove:  draw,
                             mouseup:    stopDraw,
-                            mouseup:    draw
+                            mouseup:    draw,
+                            mouseout:   stopDraw
                             ">
             </canvas>
+            <canvas id="picture_canvas">
+
+            </canvas>
+
+            <form   id="picture_form">
+                <input type="file"
+                       v-on="  change: inputFile
+                    ">
+            </form>
         </div>
     </div>
 </body>
-<script type="text/javascript" src="indexController.js"></script>
+<script type="text/javascript" src="canvasController.js"></script>
 </html>
