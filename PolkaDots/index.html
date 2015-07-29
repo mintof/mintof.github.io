@@ -15,9 +15,8 @@
                         width="{{width}}"
                         height="{{height}}"
                         v-on="  mousedown:  startDraw,
-                                mousemove:  draw,
+                                mousemove:  move,
                                 mouseup:    stopDraw,
-                                mouseup:    draw,
                                 mouseout:   stopDraw,
                                 ">
                 </canvas>
@@ -37,4 +36,5 @@
     </div>
 </body>
 <script type="text/javascript" src="canvasController.js"></script>
+<script type="text/javascript" src="CanvasUtility.js"></script>
 </html>

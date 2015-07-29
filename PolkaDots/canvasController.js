@@ -18,39 +18,13 @@ var canvas_vue = new Vue({
             e.targetVM.ex_point.x = e.layerX;
             e.targetVM.ex_point.y = e.layerY;
         },
-        draw: function(e){
+        move: function(e){
             console.log("mouseMove");
-            if(e.targetVM.is_drawing){
-                var context = e.targetVM.draw_context;
-                context.linewidth = 20;
-                var ex_point = e.targetVM.ex_point;
-                var current_point = new Object();
-                current_point.x = e.layerX;
-                current_point.y = e.layerY;
-                context.beginPath();
-                context.moveTo(ex_point.x, ex_point.y);
-                context.lineTo(current_point.x, current_point.y);
-                context.closePath();
-                context.stroke();
-                e.targetVM.ex_point = current_point;
-            }
+            e.targetVM.draw(e);
         },
         stopDraw: function(e){
             console.log("mouseDown");
-            if(e.targetVM.is_drawing){
-                var context = e.targetVM.draw_context;
-                context.linewidth = 20;
-                var ex_point = e.targetVM.ex_point;
-                var current_point = new Object();
-                current_point.x = e.layerX;
-                current_point.y = e.layerY;
-                context.beginPath();
-                context.moveTo(ex_point.x, ex_point.y);
-                context.lineTo(current_point.x, current_point.y);
-                context.closePath();
-                context.stroke();
-                e.targetVM.ex_point = current_point;
-            }
+            e.targetVM.draw(e);
             e.targetVM.is_drawing = false;
         },
         inputFile: function(e){
@@ -71,12 +45,15 @@ var canvas_vue = new Vue({
                 context.drawImage(image, 0, 0);
             }
             reader.readAsDataURL(file);
-
+        },
+        draw: function(e){
+            if(e.targetVM.is_drawing){
+                var current_point = new Object();
+                current_point.x = e.layerX;
+                current_point.y = e.layerY;
+                drawLine(e.targetVM.draw_context, e.targetVM.ex_point, current_point);
+                e.targetVM.ex_point = current_point;
+            }
         }
     }
 });
-
-function canvas_resize(canvas, width, height){
-    canvas.width = width;
-    canvas.height = height;
-}
