@@ -10,23 +10,23 @@ var canvas_vue = new Vue({
         is_drawing: false
     },
     methods:{
+
         startDraw: function(e){
-            console.log("mouseUp");
-            console.log(e);
             e.targetVM.is_drawing = true;
             context = e.targetVM.draw_context;
             e.targetVM.ex_point.x = e.layerX;
             e.targetVM.ex_point.y = e.layerY;
         },
+
         move: function(e){
-            console.log("mouseMove");
             e.targetVM.draw(e);
         },
+
         stopDraw: function(e){
-            console.log("mouseDown");
             e.targetVM.draw(e);
             e.targetVM.is_drawing = false;
         },
+
         inputFile: function(e){
             console.log("input File");
             var file = e.target.files[0];
@@ -46,6 +46,7 @@ var canvas_vue = new Vue({
             }
             reader.readAsDataURL(file);
         },
+
         draw: function(e){
             if(e.targetVM.is_drawing){
                 var current_point = new Object();
@@ -54,6 +55,12 @@ var canvas_vue = new Vue({
                 drawLine(e.targetVM.draw_context, e.targetVM.ex_point, current_point);
                 e.targetVM.ex_point = current_point;
             }
+        },
+
+        changeLineBold: function(e) {
+            console.log(e.target.value);
+            var value = e.target.value;
+            e.targetVM.draw_context.lineWidth = value;
         }
     }
 });

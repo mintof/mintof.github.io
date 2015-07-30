@@ -7,9 +7,12 @@ function canvas_resize(canvas, width, height){
 }
 
 function drawLine(context, st_point, end_point){
-    context.beginPath();
-    context.moveTo(st_point.x, st_point.y);
-    context.lineTo(end_point.x, end_point.y);
-    context.closePath();
-    context.stroke();
+    for(var i=0; i<100; i++){
+        var x = st_point.x + (end_point.x-st_point.x)/100*i;
+        var y = st_point.y + (end_point.y-st_point.y)/100*i;
+        var radius = context.lineWidth;
+        context.beginPath();
+        context.arc(x, y, radius, 0, Math.PI*2, false);
+        context.stroke();
+    }
 }
