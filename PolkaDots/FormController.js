@@ -39,6 +39,13 @@ var form_vue = new Vue({
             }else{
                 context.globalCompositeOperation = 'destination-out';
             }
+        },
+
+        changeColor: function(e){
+            var value = e.target.value;
+            var context = canvas_vue.draw_context;
+            context.fillStyle = value;
+            context.strokeStyle = value;
         }
     }
 });

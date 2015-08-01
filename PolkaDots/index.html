@@ -41,6 +41,11 @@
                 <option value="pen">ペン</option>
                 <option value="eraser">消しゴム</option>
             </select>
+
+            <select v-on="change: changeColor">
+                <option value="rgba(255, 255, 255, 1)">黒</option>
+                <option value="rgba(192, 80, 77, 1)">赤</option>
+            </select>
         </form>
     </div>
 </body>
