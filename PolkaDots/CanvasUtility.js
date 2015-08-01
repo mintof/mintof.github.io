@@ -6,7 +6,7 @@ function canvas_resize(canvas, width, height){
     canvas.height = height;
 }
 
-function drawLine(context, st_point, end_point){
+function drawLine(context, st_point, end_point, color, is_rub){
     var dx = end_point.x-st_point.x;
     var dy = end_point.y-st_point.y;
     var len = Math.sqrt(dx*dx+dy*dy);
@@ -16,6 +16,7 @@ function drawLine(context, st_point, end_point){
         var radius = context.lineWidth;
         context.beginPath();
         context.arc(x, y, radius, 0, Math.PI*2, false);
+        context.fill();
         context.stroke();
     }
 }

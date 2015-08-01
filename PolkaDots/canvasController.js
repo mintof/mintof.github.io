@@ -27,40 +27,14 @@ var canvas_vue = new Vue({
             e.targetVM.is_drawing = false;
         },
 
-        inputFile: function(e){
-            console.log("input File");
-            var file = e.target.files[0];
-            if(!file.type.match('image.*')){
-                return;
-            }
-            var reader = new FileReader();
-            reader.onload = function(){
-                var image = new Image();
-                image.src = this.result;
-                var width = image.width;
-                var height = image.height;
-                canvas_resize(canvas_vue.picture_canvas, width, height);
-                canvas_resize(canvas_vue.draw_canvas, width, height);
-                var context = document.getElementById("picture_canvas").getContext('2d');
-                context.drawImage(image, 0, 0);
-            }
-            reader.readAsDataURL(file);
-        },
-
         draw: function(e){
             if(e.targetVM.is_drawing){
                 var current_point = new Object();
                 current_point.x = e.layerX;
                 current_point.y = e.layerY;
-                drawLine(e.targetVM.draw_context, e.targetVM.ex_point, current_point);
+                drawLine(e.targetVM.draw_context, e.targetVM.ex_point, current_point, 'rgba(255,255,255,1)', false);
                 e.targetVM.ex_point = current_point;
             }
-        },
-
-        changeLineBold: function(e) {
-            console.log(e.target.value);
-            var value = e.target.value;
-            e.targetVM.draw_context.lineWidth = value;
         }
     }
 });

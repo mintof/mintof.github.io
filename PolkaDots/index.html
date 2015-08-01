@@ -26,20 +26,25 @@
 
                 </canvas>
             </div>
-
-            <form id="canvases_form">
-                <input type="file"
-                       v-on="  change: inputFile
-                    ">
-                <input type="range"
-                       min="1"
-                       max="50"
-                       v-on="   change: changeLineBold"
-                        >
-            </form>
         </div>
+        <form id="canvases_form">
+            <input type="file"
+                   v-on="  change: inputFile
+                    ">
+            <input type="range"
+                   min="1"
+                   max="50"
+                   v-on="   change: changeLineBold"
+                    >
+
+            <select v-on="change: changePen">
+                <option value="pen">ペン</option>
+                <option value="eraser">消しゴム</option>
+            </select>
+        </form>
     </div>
 </body>
 <script type="text/javascript" src="canvasController.js"></script>
 <script type="text/javascript" src="CanvasUtility.js"></script>
+<script type="text/javascript" src="FormController.js"></script>
 </html>
