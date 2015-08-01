@@ -3,7 +3,7 @@
  */
 
 polka_vue = new Vue({
-    el: "polka_dots",
+    el: "#polka_dots",
 
     data:{
         canvas: document.getElementById("polka_canvas"),

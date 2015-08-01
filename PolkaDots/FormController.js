@@ -23,6 +23,8 @@ var form_vue = new Vue({
                 canvas_resize(polka_vue.canvas, width, height);
                 var context = document.getElementById("picture_canvas").getContext('2d');
                 context.drawImage(image, 0, 0);
+                canvas_vue.draw_context.lineWidth = $("#line_width").val();
+
             }
             reader.readAsDataURL(file);
         },
