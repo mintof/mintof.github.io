@@ -36,5 +36,10 @@ var canvas_vue = new Vue({
                 e.targetVM.ex_point = current_point;
             }
         }
+    },
+    ready: function(){
+        var value = document.getElementById("line_width").value;
+        document.getElementById("draw_canvas").getContext('2d').lineWidth = value;
+        console.log(value);
     }
 });

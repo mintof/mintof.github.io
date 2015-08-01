@@ -20,6 +20,7 @@ var form_vue = new Vue({
                 var height = image.height;
                 canvas_resize(canvas_vue.picture_canvas, width, height);
                 canvas_resize(canvas_vue.draw_canvas, width, height);
+                canvas_resize(polka_vue.canvas, width, height);
                 var context = document.getElementById("picture_canvas").getContext('2d');
                 context.drawImage(image, 0, 0);
             }
@@ -46,6 +47,11 @@ var form_vue = new Vue({
             var context = canvas_vue.draw_context;
             context.fillStyle = value;
             context.strokeStyle = value;
+        },
+
+        create: function(e){
+            var were_painted = getWerePainted(canvas_vue.draw_canvas);
+            var polka_dots = createPolkaDots(were_painted);
         }
     }
 });

@@ -31,10 +31,11 @@
             <input type="file"
                    v-on="  change: inputFile
                     ">
-            <input type="range"
-                   min="1"
-                   max="50"
-                   v-on="   change: changeLineBold"
+            <input  id="line_width"
+                    type="range"
+                    min="1"
+                    max="50"
+                    v-on="   change: changeLineBold"
                     >
 
             <select v-on="change: changePen">
@@ -46,10 +47,20 @@
                 <option value="rgba(255, 255, 255, 1)">黒</option>
                 <option value="rgba(192, 80, 77, 1)">赤</option>
             </select>
+
+            <input  type="button"
+                    v-on="click:    create">
         </form>
+
+        <div id="polka_dots">
+            <canvas id="polka_canvas">
+            </canvas>
+        </div>
     </div>
 </body>
+<script type="text/javascript" src="PolkaDotsCreater.js"></script>
 <script type="text/javascript" src="canvasController.js"></script>
 <script type="text/javascript" src="CanvasUtility.js"></script>
 <script type="text/javascript" src="FormController.js"></script>
+<script type="text/javascript" src="PolkaDotsController.js"></script>
 </html>

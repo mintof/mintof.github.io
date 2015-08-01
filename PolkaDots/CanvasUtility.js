@@ -20,3 +20,31 @@ function drawLine(context, st_point, end_point, color, is_rub){
         context.stroke();
     }
 }
+
+//
+//return bool pixels[height][width]
+function getWerePainted(canvas){
+    var context = canvas.getContext('2d');
+    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    var width = imageData.width;
+    var height = imageData.height;
+    var pixels = imageData.data;
+
+    var were_painted = new Array(height);
+
+    for (var y = 0; y < height; ++y) {
+        for (var x = 0; x < width; ++x) {
+            were_painted[y] = new Array(width);
+            var base = (y * width + x) * 4;
+            var flg = false;
+            //0 0 0 0‚Å‰½‚à“h‚Á‚Ä‚È‚¢êŠ
+            for(var i=0;i<4;i++){
+                if(pixels[base+i]!=0){
+                    flg=true;
+                }
+            }
+            were_painted[y][x] = flg;
+        }
+    }
+    return were_painted;
+}
