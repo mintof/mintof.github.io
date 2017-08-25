@@ -3,9 +3,10 @@
 const WIDTH=480;
 const HEIGHT=320;
 const HORIZON_Y = 180;
-const DECAY = 0.9;
-const WAVE_W = 20;
+const DECAY = 0.8;
+const WAVE_W = 40;
 const WAVE_H = 10;
+const COROR = "rgb(0, 0, 0)";
 
 var canvas;
 var context;
@@ -28,6 +29,7 @@ function drawWave(mouse_x, mouse_y){
 	}
 
 	context.beginPath();
+	context.strokeStyle = COROR;
 	context.moveTo(mouse_x-WAVE_W, HORIZON_Y);
 	context.quadraticCurveTo(mouse_x, mouse_y+WAVE_H, mouse_x+WAVE_W, HORIZON_Y);
 	var dir_x = -1;
@@ -44,7 +46,8 @@ function drawWave(mouse_x, mouse_y){
 			context.moveTo(mouse_x-WAVE_W, HORIZON_Y);
 			nx = x;
 		}
-		while(nx<WIDTH&&nx>=0){
+		console.log(h,w);
+		while(nx<WIDTH&&nx>=0&&h>=1&&w>=1){
 			dir_y = -dir_y;
 			h = h*DECAY;
 			w = w*DECAY;
@@ -54,8 +57,33 @@ function drawWave(mouse_x, mouse_y){
 			nx = x+w*2*dir_x;
 			context.quadraticCurveTo(cx, cy, nx, HORIZON_Y);
 		}
+		if(dir_x==1){
+			context.lineTo(WIDTH,HORIZON_Y);
+		}else{
+			context.lineTo(0,HORIZON_Y);
+		}
 	}
 	context.stroke();
+}
+
+function throttle(targetFunc, time) {
+    var _time = time || 100;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(function () {
+        targetFunc();
+    }, _time);
+}
+
+function onMouseMove(e){
+	throttle(function(){
+		var width = $(window).width();
+		var height = $(window).height();
+		var x = e.clientX/width*WIDTH;
+		var y = e.clientY/height*HEIGHT;
+		clear();
+		console.log(x,y);
+		drawWave(x,y);
+	},15);
 }
 
 $(function(){
@@ -65,5 +93,6 @@ $(function(){
 	context = canvas.getContext("2d");
 	drawHorizon();
 	drawWave(130, 270);
+	canvas.addEventListener('mousemove', onMouseMove, false);
 });
 })();
