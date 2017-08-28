@@ -3,12 +3,13 @@ const WIDTH=480;
 const HEIGHT=320;
 const KANI_SRC = "umi_kani.png";
 const KAMA_SRC = "food_kanikama.png";
-const SYOKUNIN_SRC = "job_syokunin_koujou.png";
+const SYOKUNIN_SRC = "job_syokuhin_koujou.png";
 
 var canvas;
 var context;
 var canvas_flip;
-var img;
+var kani_img;
+var syoku_img;
 
 var mouse = {
 	x: WIDTH/2,
@@ -22,12 +23,21 @@ var kani = {
 	vy: 0
 };
 
+var syokunin = {
+	x: 0,
+	y: 0
+};
+
 function clear(ctx){
 	ctx.clearRect(0,0,WIDTH,HEIGHT);
 }
 
 function cookKani(){
-	//var w = Math.abs(-kani.x)
+	var w = Math.abs(syokunin.x-kani.x);
+	var h = Math.abs(syokunin.y-kani.y);
+	var r = Math.pow(w*w+h*h, 0.5);
+	if(r<48)
+		kani_img.src = KAMA_SRC;
 }
 
 function moveKani(mx,my){
@@ -50,18 +60,20 @@ function moveKani(mx,my){
 	if(kani.y>HEIGHT)kani.y=HEIGHT;
 }
 
-function drawKani(mx,my){
+function flip(){
 	canvas[1-canvas_flip].style.visibility = "hidden";
 	canvas[canvas_flip].style.visibility = "visible";
 	canvas_flip = 1-canvas_flip;
-	ctx = context[canvas_flip];
-	clear(ctx)
-	ctx.drawImage(img,kani.x,kani.y);
 }
 
 function reDraw(){
+	flip();
+	ctx = context[canvas_flip];
+	clear(context[canvas_flip]);
 	moveKani(mouse.x, mouse.y);
-	drawKani(mouse.x, mouse.y);
+	cookKani();
+	ctx.drawImage(kani_img, kani.x, kani.y);
+	ctx.drawImage(syoku_img, syokunin.x, syokunin.y);
 	setTimeout(reDraw, 10);
 }
 
@@ -78,8 +90,10 @@ $(function(){
 	canvas[0].height = canvas[1].height = HEIGHT;
 	context = [canvas[0].getContext("2d"), canvas[1].getContext("2d")];
 	canvas_flip = 1;
-	img = new Image();
-	img.src = "umi_kani.png";
+	kani_img = new Image();
+	kani_img.src = KANI_SRC;
+	syoku_img = new Image();
+	syoku_img.src = SYOKUNIN_SRC;
 	jQuery("canvas").mousemove(onMouseMove);
 	setTimeout(reDraw, 100);
 });
