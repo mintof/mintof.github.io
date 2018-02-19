@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <form>
+            <textarea oninput="onInput(this)"></textarea>
+        </form>
+    </body>
+    <div id="result">
+
+    </div>
+    <script type="text/javascript">
+        function onInput(input){
+            var convert = input.value.replace("\n", " ");
+            console.log(convert);
+            document.getElementById("result").innerHTML = convert;
+        }
+    </script>
+</html>
