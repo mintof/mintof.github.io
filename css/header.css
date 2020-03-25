@@ -1,0 +1,23 @@
+header{
+    width: 30%;
+    height: 200px;
+    margin: 0px;
+    background: #000000;
+    position: relative;
+}
+
+#portrait{
+    height: 100px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+#end{
+    right: 10px;
+    bottom: 10px;
+    font-size: 3em;
+    font-weight: bold; 
+    position: absolute;
+    color: #ffffff
+}
